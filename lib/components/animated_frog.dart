@@ -1,0 +1,88 @@
+import 'package:flame/collisions.dart';
+import 'package:flame/components.dart';
+import 'package:flame/effects.dart';
+import 'package:flame/flame.dart';
+import 'package:flutter/animation.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_game/components/ground.dart';
+import 'package:flutter_game/game/assets.dart';
+import 'package:flutter_game/game/configuration.dart';
+import 'package:flutter_game/game/frog_movement.dart';
+import 'package:flutter_game/game/hoppy_frog_game.dart';
+
+class AnimatedFrog extends SpriteAnimationComponent
+    with HasGameRef<HoppyFrogGame>, CollisionCallbacks {
+  AnimatedFrog();
+
+  int score = 0;
+  int velocity = Config.frogVelocity;
+
+  // Adds the frog and its hitbox.
+  @override
+  Future<void> onLoad() async {
+    final frogHop = await gameRef.loadSprite(Assets.animatedFrog, srcSize: Vector2.all(48));
+
+    size = Vector2(75, 75);
+    position = Vector2(50, 321);
+    // current = frogMovement.normal;
+    var runData = SpriteAnimationData.sequenced(amount: 7, stepTime: 0.15, textureSize: Vector2.all(48));
+    var runImage = await Flame.images.load(Assets.animatedFrog);
+
+    animation = SpriteAnimation.fromFrameData(runImage, runData);
+    // sprites = {
+    //   frogMovement.normal: frogHop
+    // };
+
+    add(CircleHitbox(radius: 17, position: Vector2(position.x - 33, position.y - 300), collisionType: CollisionType.active));
+  }
+
+  // Makes the frog "hop" when called.
+  void hop() {
+    add(
+        MoveByEffect(
+          Vector2(0, Config.gravity),
+          EffectController(duration: 0.2, curve: Curves.decelerate),
+          // onComplete: () => current = frogMovement.normal,
+        )
+    );
+    velocity = Config.frogVelocity;
+  }
+
+  // Detects collision.
+  @override
+  void onCollisionStart(
+      Set<Vector2> intersectionPoints,
+      PositionComponent other,
+      ) {
+    super.onCollisionStart(intersectionPoints, other);
+
+    if (other is Ground){
+      velocity = 0;
+    }
+    else{
+      gameOver();
+    }
+  }
+
+  // Restarts game.
+  void reset() {
+    position = Vector2(50, 321);
+    score = 0;
+  }
+
+
+  // Calls the game over screen.
+  void gameOver() {
+    gameRef.overlays.add('gameOver');
+    gameRef.pauseEngine();
+    game.isHit = true;
+  }
+
+
+  // Makes the frog move.
+  @override
+  void update(double dt) {
+    super.update(dt);
+    position.y += velocity * dt;
+  }
+}

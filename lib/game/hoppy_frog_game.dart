@@ -4,6 +4,7 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
+import 'package:flutter_game/components/animated_frog.dart';
 import 'package:flutter_game/components/background.dart';
 import 'package:flutter_game/components/bushes.dart';
 import 'package:flutter_game/components/frog.dart';
@@ -13,8 +14,12 @@ import 'package:flutter_game/game/configuration.dart';
 import 'package:flutter/material.dart';
 
 class HoppyFrogGame extends FlameGame with TapDetector, HasCollisionDetection {
-  late Frog frog;
+  late AnimatedFrog animatedFrog;
   late TextComponent score;
+
+  @override
+  // TODO: implement debugMode
+  bool get debugMode => super.debugMode = true;
 
   // A timer to keep track of game time.
   Timer interval = Timer(Config.pipeInterval, repeat: true);
@@ -33,12 +38,12 @@ class HoppyFrogGame extends FlameGame with TapDetector, HasCollisionDetection {
       Background(),
       Bushes(),
       Ground(),
-      frog = Frog(),
+      animatedFrog = AnimatedFrog(),
       score = buildScore()
     ]);
 
     // Initiates the main menu.
-    mainMenu();
+    // mainMenu();
 
     interval.onTick = () => add(PipeGroup());
 
@@ -63,7 +68,7 @@ class HoppyFrogGame extends FlameGame with TapDetector, HasCollisionDetection {
   @override
   void onTap() {
     super.onTap();
-    frog.hop();
+    animatedFrog.hop();
   }
 
   // Updates the game time and the score.
@@ -72,7 +77,7 @@ class HoppyFrogGame extends FlameGame with TapDetector, HasCollisionDetection {
     super.update(dt);
     interval.update(dt);
 
-    score.text = 'Score: ${frog.score}';
+    score.text = 'Score: ${animatedFrog.score}';
   }
 
   // When called overlays the main menu.

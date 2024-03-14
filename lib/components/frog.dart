@@ -72,4 +72,4 @@ class Frog extends SpriteGroupComponent<frogMovement>
       super.update(dt);
       position.y += Config.frogVelocity * dt;
     }
-    }
+}

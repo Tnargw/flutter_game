@@ -18,9 +18,9 @@ class Ground extends SpriteComponent with HasGameRef<HoppyFrogGame>{
 
     add(
       RectangleHitbox(
-        position: Vector2(0, gameRef.size.y - Config.groundHeight),
-        size: Vector2(gameRef.size.x, Config.groundHeight),
-        collisionType: CollisionType.passive
+          position: Vector2(0, gameRef.size.y - Config.groundHeight),
+          size: Vector2(gameRef.size.x, Config.groundHeight),
+          isSolid: true
       ),
     );
 
