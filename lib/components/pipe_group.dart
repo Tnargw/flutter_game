@@ -41,9 +41,5 @@ class PipeGroup extends PositionComponent with HasGameRef<HoppyFrogGame> {
     gameRef.animatedFrog.score += 1;
   }
 
-  // void updateScore() {
-  //   gameRef.frog.score += 1;
-  // }
-
 
 }

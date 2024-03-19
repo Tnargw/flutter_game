@@ -1,6 +1,7 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_game/game/hoppy_frog_game.dart';
+import 'package:flutter_game/screens/change_frog.dart';
 import 'package:flutter_game/screens/game_over.dart';
 import 'package:flutter_game/screens/main_menu.dart';
 
@@ -13,6 +14,7 @@ void main() {
       overlayBuilderMap: {
       'mainMenu': (context, _) => MainMenu(game: game),
         'gameOver': (context, _) => GameOver(game: game),
+        'changeFrog': (context, _) => ChangeFrog(game: game),
       },
     ),
   );

@@ -17,23 +17,24 @@ class AnimatedFrog extends SpriteAnimationComponent
   int score = 0;
   int velocity = Config.frogVelocity;
 
+
   // Adds the frog and its hitbox.
   @override
   Future<void> onLoad() async {
-    final frogHop = await gameRef.loadSprite(Assets.animatedFrog, srcSize: Vector2.all(48));
+    final frogHop = await gameRef.loadSprite(game.frogChoice, srcSize: Vector2.all(48));
 
     size = Vector2(75, 75);
-    position = Vector2(50, 321);
+    position = Vector2(45, 311);
     // current = frogMovement.normal;
     var runData = SpriteAnimationData.sequenced(amount: 7, stepTime: 0.15, textureSize: Vector2.all(48));
-    var runImage = await Flame.images.load(Assets.animatedFrog);
+    var runImage = await Flame.images.load(game.frogChoice);
 
     animation = SpriteAnimation.fromFrameData(runImage, runData);
     // sprites = {
     //   frogMovement.normal: frogHop
     // };
 
-    add(CircleHitbox(radius: 17, position: Vector2(position.x - 33, position.y - 300), collisionType: CollisionType.active));
+    add(CircleHitbox(radius: 17, position: Vector2(position.x - 33, position.y - 290), collisionType: CollisionType.active));
   }
 
   // Makes the frog "hop" when called.

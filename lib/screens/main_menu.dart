@@ -1,5 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_game/components/animated_frog.dart';
+import 'package:flutter_game/game/assets.dart';
 import 'package:flutter_game/game/hoppy_frog_game.dart';
 
 class MainMenu extends StatelessWidget {
@@ -67,6 +69,28 @@ class MainMenu extends StatelessWidget {
               style: TextStyle(
                 color: whiteTextColor,
                 fontSize: 14,
+              ),
+            ),
+            const SizedBox(height: 40),
+            SizedBox(
+              width: 220,
+              height: 40,
+              child: ElevatedButton(
+                onPressed: () {
+
+                  game.overlays.remove('mainMenu');
+                  game.overlays.add('changeFrog');
+
+                  },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: whiteTextColor,
+                ),
+                child: const Text(
+                  'Change Frog',
+                  style: TextStyle(
+                    fontSize: 28.0,
+                  ),
+                ),
               ),
             ),
           ],

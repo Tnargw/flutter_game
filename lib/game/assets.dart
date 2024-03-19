@@ -16,6 +16,12 @@ class Assets {
   static const basicFrog = 'basic.png';
 
   static const animatedFrog = 'animated_frog.png';
+  static const animatedFrogBlueBlue = 'animated_frog_blue_blue.png';
+  static const animatedFrogBlueBrown = 'animated_frog_blue_brown.png';
+  static const animatedFrogGreenBlue = 'animated_frog_green_blue.png';
+  static const animatedFrogPurpleBlue = 'animated_frog_purple_blue.png';
+  static const animatedFrogPurpleWhite = 'animated_frog_purple_white.png';
+
 
   // Pipe asset.
   static const pipe = 'pipe.png';
