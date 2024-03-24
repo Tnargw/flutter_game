@@ -4,10 +4,10 @@ import 'package:flame/effects.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_game/components/bug.dart';
 import 'package:flutter_game/components/ground.dart';
-import 'package:flutter_game/game/assets.dart';
 import 'package:flutter_game/game/configuration.dart';
-import 'package:flutter_game/game/frog_movement.dart';
+import 'package:flutter_game/components/pipe.dart';
 import 'package:flutter_game/game/hoppy_frog_game.dart';
 
 class AnimatedFrog extends SpriteAnimationComponent
@@ -43,7 +43,6 @@ class AnimatedFrog extends SpriteAnimationComponent
         MoveByEffect(
           Vector2(0, Config.gravity),
           EffectController(duration: 0.2, curve: Curves.decelerate),
-          // onComplete: () => current = frogMovement.normal,
         )
     );
     velocity = Config.frogVelocity;
@@ -60,23 +59,29 @@ class AnimatedFrog extends SpriteAnimationComponent
     if (other is Ground){
       velocity = 0;
     }
+    else if (other is Bug){
+      score += 5;
+      other.removeFromParent();
+    }
     else{
+      other.parent?.removeFromParent();
       gameOver();
+
     }
   }
 
   // Restarts game.
   void reset() {
-    position = Vector2(50, 321);
+    position = Vector2(45, 321);
     score = 0;
   }
 
 
   // Calls the game over screen.
   void gameOver() {
+    game.isHit = true;
     gameRef.overlays.add('gameOver');
     gameRef.pauseEngine();
-    game.isHit = true;
   }
 
 

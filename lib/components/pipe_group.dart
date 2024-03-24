@@ -1,6 +1,6 @@
 import 'dart:math';
-
 import 'package:flame/components.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_game/components/pipe.dart';
 import 'package:flutter_game/game/configuration.dart';
 import 'package:flutter_game/game/hoppy_frog_game.dart';
@@ -16,9 +16,16 @@ class PipeGroup extends PositionComponent with HasGameRef<HoppyFrogGame> {
   Future<void> onLoad() async {
     position.x = gameRef.size.x;
 
-    double randomInt = _random.nextDouble() * 150 + 50;
+    final heightMinusGround = gameRef.size.y - Config.groundHeight;
 
-    add(Pipe(pipePosition: PipePosition.bottom, height: randomInt));
+    final topHeight = _random.nextDouble() * 197 + 50;
+    final bottomHeight = heightMinusGround - topHeight - 100;
+
+    addAll([
+      Pipe(pipePosition: PipePosition.top, height: topHeight),
+      Pipe(pipePosition: PipePosition.bottom, height: bottomHeight)
+    ]);
+
   }
   
   @override
@@ -29,11 +36,6 @@ class PipeGroup extends PositionComponent with HasGameRef<HoppyFrogGame> {
     if (position.x < -15) {
       removeFromParent();
       updateScore();
-    }
-
-    if (gameRef.isHit) {
-      removeFromParent();
-      gameRef.isHit = false;
     }
   }
 

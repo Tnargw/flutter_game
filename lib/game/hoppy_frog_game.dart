@@ -6,6 +6,8 @@ import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flutter_game/components/animated_frog.dart';
 import 'package:flutter_game/components/background.dart';
+import 'package:flutter_game/components/bug.dart';
+import 'package:flutter_game/components/bug_group.dart';
 import 'package:flutter_game/components/bushes.dart';
 import 'package:flutter_game/components/ground.dart';
 import 'package:flutter_game/components/pipe_group.dart';
@@ -16,12 +18,13 @@ import 'package:flutter/material.dart';
 class HoppyFrogGame extends FlameGame with TapDetector, HasCollisionDetection {
   late AnimatedFrog animatedFrog;
   late TextComponent score;
+  late BugSpawner bugSpawner;
+  late PipeGroup pipeGroup;
 
   var frogChoice = Assets.animatedFrog;
 
-  @override
-  // TODO: implement debugMode
-  bool get debugMode => super.debugMode = true;
+  // Uncomment to see hit-boxes.
+  // bool get debugMode => super.debugMode = true;
 
   // A timer to keep track of game time.
   Timer interval = Timer(Config.pipeInterval, repeat: true);
@@ -43,13 +46,17 @@ class HoppyFrogGame extends FlameGame with TapDetector, HasCollisionDetection {
       Bushes(),
       Ground(),
       animatedFrog = AnimatedFrog(),
-      score = buildScore()
+      score = buildScore(),
+      bugSpawner = BugSpawner()
     ]);
+
 
     // Initiates the main menu.
     mainMenu();
 
-    interval.onTick = () => add(PipeGroup());
+    interval.onTick = () => add(pipeGroup = PipeGroup());
+
+    debugPrint("${size.y}");
 
   }
 
@@ -89,6 +96,7 @@ class HoppyFrogGame extends FlameGame with TapDetector, HasCollisionDetection {
     interval.update(dt);
 
     score.text = 'Score: ${animatedFrog.score}';
+
   }
 
   // When called overlays the main menu.

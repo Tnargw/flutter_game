@@ -11,6 +11,8 @@ class Assets {
   static const treesFive = 'trees_five.png';
   static const bushes = 'bushes.png';
 
+  static const bug = 'roach.png';
+
   // Frog assets.
   static const frogHop = 'frog_hop.png';
   static const basicFrog = 'basic.png';
@@ -25,5 +27,6 @@ class Assets {
 
   // Pipe asset.
   static const pipe = 'pipe.png';
+  static const pipeFlipped = 'pipe_flipped.png';
 
 }

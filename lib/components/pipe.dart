@@ -20,12 +20,20 @@ class Pipe extends SpriteComponent with HasGameRef<HoppyFrogGame> {
 
   Future<void> onLoad() async {
     final pipe = await Flame.images.load(Assets.pipe);
+    final pipeFlipped = await Flame.images.load(Assets.pipeFlipped);
     size = Vector2(50, height);
 
-
-    PipePosition.bottom;
+    // Handles the assets and placement of the top and bottom pipes.
+    switch (pipePosition) {
+      case PipePosition.top:
+        position.y = 0;
+        sprite = Sprite(pipeFlipped);
+        break;
+      case PipePosition.bottom:
         position.y = gameRef.size.y - size.y - Config.groundHeight;
         sprite = Sprite(pipe);
+        break;
+    }
 
     add(RectangleHitbox(collisionType: CollisionType.passive));
 

@@ -15,6 +15,6 @@ I utilized "Flame" which is a game engine designed specifically for Flutter.
 * [Flutter](https://flutter.dev/)
 
 # Future Work
-* Make frog animated.
+* Make the main menu look similar to the actual game, with working parallax.
 * Add sound effects.
-* Add additional objectives, such as a fly to grab that gives a bonus.
+* Add a lifetime high score variable that can save and carry over.

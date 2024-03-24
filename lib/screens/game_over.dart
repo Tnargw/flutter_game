@@ -1,6 +1,7 @@
 import 'package:flame/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_game/components/pipe_group.dart';
 import 'package:flutter_game/game/assets.dart';
 import 'package:flutter_game/game/hoppy_frog_game.dart';
 
