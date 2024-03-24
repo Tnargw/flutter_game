@@ -35,16 +35,12 @@ class GameOver extends StatelessWidget {
     ),
   );
 
-  //   void onRestart() {
-  //     game.frog.score = 0;
-  //     game.frog.reset();
-  //     game.overlays.remove('gameOver');
-  //     game.resumeEngine();
-  // }
+
   void onRestart() {
     game.animatedFrog.score = 0;
     game.animatedFrog.reset();
     game.overlays.remove('gameOver');
+    game.pipeGroup.removeFromParent();
     game.resumeEngine();
   }
 }

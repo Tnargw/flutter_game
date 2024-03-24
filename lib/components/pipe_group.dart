@@ -19,7 +19,7 @@ class PipeGroup extends PositionComponent with HasGameRef<HoppyFrogGame> {
     final heightMinusGround = gameRef.size.y - Config.groundHeight;
 
     final topHeight = _random.nextDouble() * 197 + 50;
-    final bottomHeight = heightMinusGround - topHeight - 100;
+    final bottomHeight = heightMinusGround - topHeight - 125;
 
     addAll([
       Pipe(pipePosition: PipePosition.top, height: topHeight),

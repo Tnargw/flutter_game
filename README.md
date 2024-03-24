@@ -3,7 +3,7 @@ This is a simple game based off of "Flappy Bird."
 
 I built this app to get more familiar with Flutter, as well as mobile development in general.
 
-[Software Demo Video](https://youtu.be/YIll5ydPNsY)
+[Software Demo Video](https://youtu.be/XdV0WEQbVMc)
 
 # Development Environment
 
